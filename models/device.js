@@ -1,6 +1,12 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
-var deviceSchema = new mongoose.Schema({
+var config = require('../config/configuration');
+var Schema = mongoose.Schema;
+
+var connection = mongoose.createConnection(config.host + ':' + config.port);
+
+var DeviceSchema = new Schema({
   device: {
       type: Number,
       required: true
@@ -11,4 +17,4 @@ var deviceSchema = new mongoose.Schema({
   }
 });
 
-var Device = module.exports = mongoose.model('devices', deviceSchema);
+module.exports = connection.model('device', DeviceSchema);

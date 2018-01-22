@@ -4,9 +4,13 @@ var bodyParser = require('body-parser');
 var port = 3000;
 var position = require('./models/position');
 
-require('./routes/routes')(app);
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 app.use(bodyParser.json());
+
+require('./routes/routes')(app);
 
 app.listen(port);
 

@@ -1,0 +1,5 @@
+#No modules
+node_modules/**
+
+#No database
+database/**

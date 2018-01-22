@@ -1,48 +1,30 @@
 /*jshint esversion:6*/
 var config = require('../config/configuration');
 
-var url = config.host + ':' + config.port;
-var mongoClient = require('mongodb').MongoClient;
+var Position = require('../models/position');
+var Device = require('../models/device');
 
 var self = module.exports = {
-    Connect: function () {
+    DisplayAll: function () {
         return new Promise(function (resolve, reject) {
-            mongoClient.connect(url, (err, database) => {
+            Position.find({}).exec(function(err, result) {
                 if (err)
                     reject(err);
 
-                resolve(database.db(config.database));
-            });
+                resolve(result);
+            });            
         });
     },
 
-    DisplayAll: function () {
+    Insert: function (obj) {        
         return new Promise(function (resolve, reject) {
-            self.Connect().then(function (db) {
-                db.collection(config.positions).find({}).toArray(function (err, result) {
-                    if (err)
-                        reject(err);
-
-                    resolve(result);
-                });
-            }).catch(function (err) {
-                reject(err);
-            });
-        });
-    },
-
-    Insert: function (obj) {
-        return new Promise(function (resolve, reject) {
-            self.Connect().then(function (db) {
-                db.collection(config.positions).insertOne(obj, function (err, result) {
-                    if (err)
-                        reject(err);
-
-                    resolve(result);
-                });
-            }).catch(function (err) {
-                reject(err);
-            });
+            var newPos = new Position(obj);            
+            newPos.save(function(err, result) {                
+                if (err)
+                    reject(err);
+                
+                resolve(result);
+            });            
         });
     },
 
@@ -52,47 +34,33 @@ var self = module.exports = {
         };
 
         return new Promise(function (resolve, reject) {
-            self.Connect().then(function (db) {
-                db.collection(config.positions).find(query).toArray(function (err, result) {
-                    if (err)
-                        reject(err);
-
-                    resolve(result);
-                });
-            }).catch(function (err) {
-                reject(err);
-            });
+            Position.find({"device": deviceId}).exec(function(err, result) {
+                if (err)
+                    reject(err);
+                
+                resolve(result);
+            });            
         });
     },
 
     DropAll: function () {
         return new Promise(function (resolve, reject) {
-            self.Connect().then(function (db) {
-                db.collection(config.positions).remove({}, function (err, result) {
-                    if (err)
-                        reject(err);
-
-                    resolve(result);
-                });
-            }).catch(function (err) {
-                reject(err);
+            Position.remove({}, function(err, result) {
+                if (err)
+                    reject(err);
+                
+                resolve(result);
             });
         });
     },
 
     DropByDeviceId: function (deviceId) {
         return new Promise(function (resolve, reject) {
-            self.Connect().then(function (db) {
-                db.collection(config.positions).remove({
-                    "device": deviceId
-                }, function (err, result) {
-                    if (err)
-                        reject(err);
-
-                    resolve(result);
-                });
-            }).catch(function (err) {
-                reject(err);
+            Position.remove({"device": deviceId}).exec(function(err, result) {
+                if (err)
+                    reject(err);
+                
+                resolve(result);
             });
         });
     }

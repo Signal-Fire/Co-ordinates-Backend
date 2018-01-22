@@ -22,7 +22,7 @@ module.exports = function (app) {
 		});
 	});
 
-	app.post('/insert', function (req, res) {
+	app.post('/insert', function (req, res) {		
 		queries.Insert(req.body).then(function (result) {
 			res.json(result);
 		}).catch(function (result) {

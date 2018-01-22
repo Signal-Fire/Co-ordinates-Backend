@@ -1,7 +1,14 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+
+var config = require('../config/configuration');
+
+var Schema = mongoose.Schema;
+
+var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + config.database);
 
 //Create position schema
-var positionSchema = mongoose.Schema({
+var PositionSchema = new Schema({
   device: {
     type: Number,
     required: true
@@ -21,4 +28,4 @@ var positionSchema = mongoose.Schema({
   }
 });
 
-var Position = module.exports = mongoose.model('positions', positionSchema);
+module.exports = conn.model('position', PositionSchema);

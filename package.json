@@ -9,6 +9,7 @@
   "author": "Henry Pye",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "*",
     "express": "*",
     "jshint": "^2.9.5",

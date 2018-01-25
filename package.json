@@ -13,6 +13,7 @@
     "body-parser": "*",
     "express": "*",
     "jshint": "^2.9.5",
+    "moment": "^2.20.1",
     "mongodb": "^3.0.0-rc0",
     "mongoose": "*",
     "nodemon": "^1.13.3",

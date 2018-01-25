@@ -1,13 +1,14 @@
 /*jshint esversion: 6*/
 var queries = require('../actions/queries');
+var login = require('../actions/login');
 
 module.exports = function (app) {
 	app.get('/', function (req, res) {
 		res.send('Howdy');
 	});
 
-	app.post('/signup', function(req, res) {
-		queries.SignUp(req.body).then(function(result) {
+	app.post('/login', function(req, res) {
+		login.Perform(req.body).then(function(result) {
 			res.send(result);
 		}).catch(function(err) {
 			res.send(err);

@@ -11,9 +11,11 @@ var self = module.exports = {
                 email: info.email
             };
             Device.findOne({email: info.email}, function(err, result) {
-                if (err)
+                if (err || result === null) {
                     reject(err);
-
+                    return err;
+                }
+                
                 var log = new Log({
                     message: "User " + info.email + " logged in",
                     time: moment().format("MM-DD-YYYY HH:mm:ss")

@@ -1,6 +1,6 @@
 var status = module.exports = {
     Unauthorized: function(res) {
-        res.status(404).send();
+        res.status(401).send();
     },
 
     Accepted: function(res) {

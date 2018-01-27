@@ -10,21 +10,21 @@ var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + con
 var UserSchema = new Schema({
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
         required: true
     },
     created_date: {
-        type: String,
-        required: true
+        type: String
     }
 });
 
 UserSchema.pre('save', function(next) {
    var user = this;
-   
+
    if (this.isModified('password') || this.isNew) {
        bcrypt.genSalt(10, function(err, salt) {
            if (err)
@@ -42,7 +42,7 @@ UserSchema.pre('save', function(next) {
    }
 });
 
-UserSchema.methods.comparePassword = function(passw, cb) {
+UserSchema.methods.comparePassword = function(passw, callback) {
     bcrypt.compare(passw, this.password, function(err, isMatch) {
         if (err)
             return callbackify(err);

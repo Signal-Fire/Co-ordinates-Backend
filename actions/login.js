@@ -10,15 +10,19 @@ var self = module.exports = {
     AdminLogin: function(info) {
         return new Promise(function(resolve, reject) {
             var query = {
-                email: info.email,
-                password: info.password
+                email: info.email
             };
             User.findOne(query, function(err, result) {
-                if (err || result === null) {
+                if (err || !result) {
                     reject(err);
                     return err;
                 }
                 
+                result.comparePassword(info.password, function(err, isMatch) {
+                    if (!isMatch || err) {
+                        reject(err);
+                    }
+
                     var log = new Log({
                         message: "Admin user: " + info.email + " logged in",
                         time: moment().format("MM-DD-YYYY HH:mm:ss")
@@ -31,6 +35,7 @@ var self = module.exports = {
                     });
 
                     resolve(result);
+                });          
             });
         });
     },

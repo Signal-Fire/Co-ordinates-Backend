@@ -2,6 +2,7 @@
 var queries = require('../actions/queries');
 var login = require('../actions/login');
 var status = require('../actions/status');
+var registration = require('../actions/registration');
 
 module.exports = function (app) {
 	app.get('/', function (req, res) {
@@ -41,7 +42,17 @@ module.exports = function (app) {
 		});
 	});
 
+	app.post('/signup', function(req, res) {
+		registration.Signup(req.body).then(function(result) {
+			status.Accepted(res);
+		}).catch(function(err) {
+			console.log(err);
+			status.BadRequest(res);
+		});
+	});
+
 	app.post('/adminlogin', function(req, res) {
+		console.log(req);
 		login.AdminLogin(req.body).then(function(result) {
 			status.Accepted(res);
 		}).catch(function(err) {

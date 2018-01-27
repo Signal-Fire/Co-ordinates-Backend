@@ -2,6 +2,7 @@
 var queries = require('../actions/queries');
 var login = require('../actions/login');
 var status = require('../actions/status');
+var registration = require('../actions/registration');
 
 module.exports = function (app) {
 	app.get('/', function (req, res) {
@@ -33,8 +34,34 @@ module.exports = function (app) {
 		});
 	});
 
+	app.post('/insertdevice', function(req, res) {
+		queries.InsertDevice(req.body).then(function(result) {
+			status.Accepted(res);
+		}).catch(function(err) {
+			status.BadRequest(res);
+		});
+	});
+
+	app.post('/signup', function(req, res) {
+		registration.Signup(req.body).then(function(result) {
+			status.Accepted(res);
+		}).catch(function(err) {
+			console.log(err);
+			status.BadRequest(res);
+		});
+	});
+
+	app.post('/adminlogin', function(req, res) {
+		console.log(req);
+		login.AdminLogin(req.body).then(function(result) {
+			status.Accepted(res);
+		}).catch(function(err) {
+			status.Unauthorized(res);
+		});
+	});
+
 	app.post('/insert', function (req, res) {		
-		queries.Insert(req.body).then(function (result) {
+		queries.InsertPosition(req.body).then(function (result) {
 			status.Accepted(res);
 		}).catch(function(err) {
 			status.Unauthorized(res);

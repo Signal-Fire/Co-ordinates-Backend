@@ -16,7 +16,7 @@ var self = module.exports = {
         });
     },
 
-    Insert: function (obj) {        
+    InsertPosition: function (obj) {        
         return new Promise(function (resolve, reject) {
             var newPos = new Position(obj);            
             newPos.save(function(err, result) {                
@@ -25,6 +25,18 @@ var self = module.exports = {
                 
                 resolve(result);
             });            
+        });
+    },
+
+    InsertDevice: function(obj) {
+        return new Promise(function(resolve, reject) {
+            var newDevice = new Device(obj);           
+            newDevice.save(function(err, result) {
+                if (err)
+                    reject(err);
+                    
+                resolve(result);
+            });
         });
     },
 

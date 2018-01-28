@@ -52,9 +52,8 @@ module.exports = function (app) {
 	});
 
 	app.post('/adminlogin', function(req, res) {
-		console.log(req);
-		login.AdminLogin(req.body).then(function(result) {
-			status.Accepted(res);
+		login.Perform(req.body).then(function(result) {			
+			status.Accepted(res, result);
 		}).catch(function(err) {
 			status.Unauthorized(res);
 		});

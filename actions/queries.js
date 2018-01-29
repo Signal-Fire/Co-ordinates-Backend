@@ -43,10 +43,9 @@ var self = module.exports = {
     FindByDeviceId: function (deviceId) {
         var query = {
             "device": deviceId
-        };
-
+        };       
         return new Promise(function (resolve, reject) {
-            Position.find({"device": deviceId}).exec(function(err, result) {
+            Device.findOne({"device": deviceId}).exec(function(err, result) {                
                 if (err)
                     reject(err);
                 

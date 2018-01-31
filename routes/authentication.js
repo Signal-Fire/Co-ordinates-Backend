@@ -6,7 +6,7 @@ var registration = require('../actions/registration');
 
 app.post('/login', function(req, res) {
     login.Perform(req.body).then(function(result) {
-        status.Accepted(res);
+        status.Accepted(res, result);
     }).catch(function(err) {
         status.Unauthorized(res);
     });

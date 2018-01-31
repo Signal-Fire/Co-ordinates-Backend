@@ -11,7 +11,8 @@ app.post('/device', function(req, res) {
     });
 });
 
-app.post('/position', function (req, res) {		
+app.post('/position', function (req, res) {
+    console.log(req);	
     queries.InsertPosition(req.body).then(function (result) {
         status.Accepted(res);
     }).catch(function(err) {

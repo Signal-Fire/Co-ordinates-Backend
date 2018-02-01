@@ -16,15 +16,18 @@ var self = module.exports = {
         });
     },
 
-    InsertPosition: function (obj) {        
+    InsertPosition: function (obj) {   
         return new Promise(function (resolve, reject) {
-            var newPos = new Position(obj);            
-            newPos.save(function(err, result) {                
-                if (err)
-                    reject(err);
-                
-                resolve(result);
-            });            
+            for (var i = 0; i < obj.length; i++) {
+                console.log(obj[i]);
+                var newPos = new Position(obj[i]);            
+                newPos.save(function(err, result) {                
+                    if (err)
+                        reject(err);
+                    
+                    resolve(result);
+                });
+            }                   
         });
     },
 

@@ -51,7 +51,7 @@ var self = module.exports = {
 
     Perform: function(info) {
         return new Promise(function(resolve, reject) {            
-            User.findOne({email: info.email}, function(err, result) {
+            Device.findOne({email: info.email}, function(err, result) {
                 if (err || result === null) {
                     reject(err);
                     return err;

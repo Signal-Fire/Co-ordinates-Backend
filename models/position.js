@@ -10,7 +10,7 @@ var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + con
 //Create position schema
 var PositionSchema = new Schema({
   device: {
-    type: Number,
+    type: String,
     required: true
   },
   latitude: {

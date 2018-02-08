@@ -6,11 +6,7 @@ var Schema = mongoose.Schema;
 
 var connection = mongoose.createConnection(config.host + ':' + config.port + '/' + config.database);
 
-var DeviceSchema = new Schema({
-  device: {
-      type: String,
-      required: true
-  },
+var DeviceSchema = new Schema({  
   email: {
       type: String,
       required: true

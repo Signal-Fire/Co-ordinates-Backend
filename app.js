@@ -26,6 +26,10 @@ app.use('/api/insert', insertion);
 app.use('/api/delete', deletion);
 app.use('/api/auth', authentication);
 
+app.get('/', function(req, res, next) {
+	res.send('hey');
+});
+
 require('./routes/routes')(app);
 
 app.listen(port);

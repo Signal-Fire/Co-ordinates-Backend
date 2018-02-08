@@ -14,7 +14,6 @@ var self = module.exports = {
             });
 
             newUser.save(newUser, function(err, result) {
-                console.log(err);
                 if (err) {
                     reject(err);
                     return err;

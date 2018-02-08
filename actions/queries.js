@@ -18,6 +18,16 @@ var self = module.exports = {
 
     InsertPosition: function (obj) {   
         return new Promise(function (resolve, reject) {
+            if (obj.length === undefined) {
+                var newPos = new Position(obj);
+                newPos.save(function(err, result) {
+                    if (err)
+                        reject(err);
+
+                    resolve(result);
+                });
+            }
+
             for (var i = 0; i < obj.length; i++) {
                 console.log(obj[i]);
                 var newPos = new Position(obj[i]);            

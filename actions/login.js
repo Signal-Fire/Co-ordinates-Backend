@@ -10,11 +10,8 @@ var User = require('../models/user');
 var self = module.exports = {
     
     AdminLogin: function(info) {
-        return new Promise(function(resolve, reject) {
-            var query = {
-                email: info.email
-            };
-            User.findOne(query, function(err, result) {                
+        return new Promise(function(resolve, reject) {    
+            User.findOne({email: info.email}, function(err, result) {      
                 if (err || !result) {
                     reject(err);
                     return err;

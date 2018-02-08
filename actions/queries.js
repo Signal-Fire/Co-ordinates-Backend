@@ -7,17 +7,39 @@ var Device = require('../models/device');
 var self = module.exports = {
     DisplayAll: function () {
         return new Promise(function (resolve, reject) {
-            Position.find({}).exec(function(err, result) {
+            Position.find({})
+                .sort( { time: -1 } ).exec(function(err, result) {
+                    if (err)
+                        reject(err);
+
+                    resolve(result);
+                });            
+        });
+    },
+
+    DisplayDevices: function() {
+        return new Promise(function(resolve, reject) {
+            Device.find({}).exec(function(err, result) {
                 if (err)
                     reject(err);
 
                 resolve(result);
-            });            
+            });
         });
     },
 
     InsertPosition: function (obj) {   
         return new Promise(function (resolve, reject) {
+            if (obj.length === undefined) {
+                var newPos = new Position(obj);
+                newPos.save(function(err, result) {
+                    if (err)
+                        reject(err);
+
+                    resolve(result);
+                });
+            }
+
             for (var i = 0; i < obj.length; i++) {
                 console.log(obj[i]);
                 var newPos = new Position(obj[i]);            
@@ -41,6 +63,17 @@ var self = module.exports = {
                 resolve(result);
             });
         });
+    },
+
+    FindPositionByDeviceId: function(deviceId) {
+        return new Promise(function(resolve, reject) {
+            Position.find({"device": deviceId}).exec(function(err, result) {
+                if (err)
+                    reject(err);
+                
+                resolve(result);
+            });
+        });    
     },
 
     FindByDeviceId: function (deviceId) {

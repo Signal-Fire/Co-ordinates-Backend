@@ -34,4 +34,4 @@ require('./routes/routes')(app);
 
 app.listen(port);
 
-console.log('Run Forrest Run! 3,000 miles!');
+console.log('Run Forrest Run! ' + port + ' miles!');

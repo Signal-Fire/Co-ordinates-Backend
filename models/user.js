@@ -5,7 +5,7 @@ var config = require('../config/configuration');
 
 var Schema = mongoose.Schema;
 
-var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + config.database);
+var conn = mongoose.createConnection(config.db_url);
 
 var UserSchema = new Schema({
     email: {
@@ -18,7 +18,8 @@ var UserSchema = new Schema({
         required: true
     },
     created_date: {
-        type: String
+        type: Date,
+        default: Date.now
     }
 });
 

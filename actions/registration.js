@@ -9,8 +9,7 @@ var self = module.exports = {
         return new Promise(function(resolve, reject) {
             var newUser = new User({
                 email: user.email,
-                password: user.password,
-                created_date: moment().format("DD-MM-YYYY HH:mm:ss")
+                password: user.password
             });
 
             newUser.save(newUser, function(err, result) {

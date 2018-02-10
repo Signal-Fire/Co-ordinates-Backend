@@ -23,8 +23,7 @@ var self = module.exports = {
                     }
 
                     var log = new Log({
-                        message: "Admin user: " + info.email + " logged in",
-                        time: moment().format("MM-DD-YYYY HH:mm:ss")
+                        message: "Admin user: " + info.email + " logged in"
                     });
 
                     log.save(function(err, result) {
@@ -55,8 +54,7 @@ var self = module.exports = {
                 }
                 
                 var log = new Log({
-                    message: (info.email === config.AdminUser ? "User " : "Admin User ") + info.email + " logged in",
-                    time: moment().format("MM-DD-YYYY HH:mm:ss")
+                    message: (info.email === config.AdminUser ? "User " : "Admin User ") + info.email + " logged in"
                 });
 
                 log.save(function(err, result) {

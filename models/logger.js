@@ -6,11 +6,7 @@ var config = require('../config/configuration');
 
 var Schema = mongoose.Schema;
 
-var conn = mongoose.createConnection(config.user + 
-    ":" + config.password + 
-    "@" + config.host + 
-    ':' + config.port + 
-    '/' + config.collection);
+var conn = mongoose.createConnection(config.db_url);
 
 var LoggerSchema = new Schema({
     message: {
@@ -19,7 +15,7 @@ var LoggerSchema = new Schema({
     },
     time: {
         type: String,
-        default: null
+        default: Date.now
     }
 });
 

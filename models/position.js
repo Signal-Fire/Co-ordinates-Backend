@@ -5,7 +5,7 @@ var config = require('../config/configuration');
 
 var Schema = mongoose.Schema;
 
-var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + config.database);
+var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + config.collection);
 
 //Create position schema
 var PositionSchema = new Schema({

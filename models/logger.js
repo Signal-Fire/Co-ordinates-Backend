@@ -6,7 +6,7 @@ var config = require('../config/configuration');
 
 var Schema = mongoose.Schema;
 
-var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + config.database);
+var conn = mongoose.createConnection(config.host + ':' + config.port + '/' + config.collection);
 
 var LoggerSchema = new Schema({
     message: {

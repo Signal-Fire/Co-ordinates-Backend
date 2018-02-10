@@ -4,7 +4,11 @@ mongoose.Promise = require('bluebird');
 var config = require('../config/configuration');
 var Schema = mongoose.Schema;
 
-var connection = mongoose.createConnection(config.host + ':' + config.port + '/' + config.collection);
+var conn = mongoose.createConnection(config.user + 
+  ":" + config.password + 
+  "@" + config.host + 
+  ':' + config.port + 
+  '/' + config.collection);
 
 var DeviceSchema = new Schema({  
   email: {
@@ -13,4 +17,4 @@ var DeviceSchema = new Schema({
   }
 });
 
-module.exports = connection.model('Device', DeviceSchema);
+module.exports = conn.model('Device', DeviceSchema);

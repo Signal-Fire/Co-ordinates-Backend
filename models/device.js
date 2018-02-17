@@ -1,5 +1,7 @@
+/*jshint esversion: 6*/
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
+var crypto = require('crypto');
 
 var config = require('../config/configuration');
 var Schema = mongoose.Schema;

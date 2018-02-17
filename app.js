@@ -7,6 +7,7 @@ var authentication = require('./routes/authentication');
 var insertion = require('./routes/insertion');
 var find = require('./routes/find');
 var deletion = require('./routes/deletion');
+var cronOps = require('./actions/cron-ops');
 
 app.options("/*", function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -31,6 +32,8 @@ app.get('/', function(req, res, next) {
 });
 
 require('./routes/routes')(app);
+
+var cron = new cronOps();
 
 app.listen(port);
 

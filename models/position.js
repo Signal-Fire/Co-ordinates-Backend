@@ -22,8 +22,8 @@ var PositionSchema = new Schema({
     required: true
   },
   time: {
-    type: Date,
-    default: Date.now
+    type: String,
+    default: Date.now.toString()
   }
 });
 

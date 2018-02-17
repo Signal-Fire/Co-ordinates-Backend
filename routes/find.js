@@ -16,7 +16,6 @@ app.get('/position/:id', function(req, res) {
         .then(function(result) {
             status.Accepted(res, result);
         }).catch(function(err) {
-            console.log(err);
             status.BadRequest(res);
         });
 });

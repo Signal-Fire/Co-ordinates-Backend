@@ -30,7 +30,7 @@ var self = module.exports = {
                         if (err)
                             reject(err);
 
-                        console.log("ADMIN USER LOGGED IN");
+                        console.log(result.message);
                     });
 
                     var token = jwt.encode(info.email, config.passport_secret);

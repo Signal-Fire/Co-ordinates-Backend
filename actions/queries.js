@@ -41,7 +41,6 @@ var self = module.exports = {
             }
 
             for (var i = 0; i < obj.length; i++) {
-                console.log(obj[i]);
                 var newPos = new Position(obj[i]);            
                 newPos.save(function(err, result) {                
                     if (err)

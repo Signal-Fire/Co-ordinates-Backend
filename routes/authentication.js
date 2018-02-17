@@ -21,7 +21,6 @@ app.post('/signup', function(req, res) {
 });
 
 app.post('/adminlogin', function(req, res) {
-    console.log(req.body);
     login.AdminLogin(req.body).then(function(result) {			
         status.Accepted(res, result);
     }).catch(function(err) {

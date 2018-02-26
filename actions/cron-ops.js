@@ -25,7 +25,7 @@ class CronOps {
             text: 'We have been unable to find your location for over an hour now! Please make sure you are tracking correctly!'
           };
 
-        var task = cron.schedule('*/60 * * * *', function() {
+        var task = cron.schedule('* * * * * *', function() {
             
             queries.DisplayDevices()
             .then(function(result) {
@@ -34,24 +34,28 @@ class CronOps {
                     .then(function(result) {
                         if (result.length > 0) {   
                             var timeToNotify = moment().add(-60, 'minutes');
+                            
                             var lastLog = moment(result[result.length - 2].time);
 
-                            if (lastLog.isValid()) {
-                                if (timeToNotify > lastLog) {
-                                    queries.FindByDeviceId(result[i].device).then(function(result) {
-                                        mailOptions.to = result.email;
-                                        transporter.sendMail(mailOptions, function(error, info){
-                                            if (error) {
-                                              console.log(error);
-                                            } else {
-                                              console.log('Email sent: ' + info.response);
-                                            }
-                                          });
-                                    }).catch(function(err) {
-                                        console.log(err);
+                            if (!lastLog.isValid()) {
+                                lastLog = moment(result[result.length - 2].time, 'DD-MM-YYYY hh:mm:ss').format();    
+                                lastLog = moment(lastLog);
+                            }
+
+                            if (timeToNotify > lastLog) {
+                                queries.FindByDeviceId(result[i].device).then(function(result) {
+                                    mailOptions.to = result.email;
+                                    transporter.sendMail(mailOptions, function(error, info){
+                                        if (error) {
+                                            console.log(error);
+                                        } else {
+                                            console.log('Email sent: ' + info.response);
+                                        }
                                     });
-                                }
-                            }                            
+                                }).catch(function(err) {
+                                    console.log(err);
+                                });
+                            }                         
                         }
                     }).catch(function(err) {
                         console.log(err);

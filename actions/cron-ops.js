@@ -25,7 +25,7 @@ class CronOps {
             text: 'We have been unable to find your location for over an hour now! Please make sure you are tracking correctly!'
           };
 
-        var task = cron.schedule('* * * * * *', function() {
+        var task = cron.schedule('*/60 * * * *', function() {
             
             queries.DisplayDevices()
             .then(function(result) {

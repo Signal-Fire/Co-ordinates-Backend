@@ -34,7 +34,9 @@ class CronOps {
                     .then(function(result) {
                         if (result.length > 0) {   
                             var timeToNotify = moment().add(-60, 'minutes');
-                            
+
+                            var tooLate = moment().add(-24, 'hours');
+
                             var lastLog = moment(result[result.length - 2].time);
 
                             if (!lastLog.isValid()) {
@@ -42,7 +44,7 @@ class CronOps {
                                 lastLog = moment(lastLog);
                             }
 
-                            if (timeToNotify > lastLog) {
+                            if ((timeToNotify > lastLog) && (lastLog > tooLate)) {
                                 queries.FindByDeviceId(result[i].device).then(function(result) {
                                     mailOptions.to = result.email;
                                     transporter.sendMail(mailOptions, function(error, info){

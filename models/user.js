@@ -1,7 +1,6 @@
-/*jshint esversion: 6*/
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-var config = require('../config/configuration');
+var config = require('../Config');
 
 var Schema = mongoose.Schema;
 

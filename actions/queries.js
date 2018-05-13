@@ -1,13 +1,11 @@
-/*jshint esversion:6*/
-var config = require('../config/configuration');
+var config = require('../Config');
 var Position = require('../models/position');
 var Device = require('../models/device');
 
 var self = module.exports = {
     DisplayAll: function () {
         return new Promise(function (resolve, reject) {
-            Position.find({})
-                .sort( { time: -1 } ).exec(function(err, result) {
+            Position.find({}).exec(function(err, result) {
                     if (err)
                         reject(err);
 
@@ -70,6 +68,17 @@ var self = module.exports = {
                     reject(err);
                 
                 resolve(result);
+            });
+        });    
+    },
+
+    FindCountByDeviceId: function(deviceId) {
+        return new Promise(function(resolve, reject) {
+            Position.find({"device": deviceId}).exec(function(err, result) {
+                if (err)
+                    reject(err);
+                
+                resolve(result.length);
             });
         });    
     },

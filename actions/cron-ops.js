@@ -1,7 +1,6 @@
-/* jshint esversion: 6*/
 var cron = require('node-cron');
 var queries = require('./queries');
-var config = require('../config/configuration');
+var config = require('../Config');
 var moment = require('moment');
 var nodemailer = require('nodemailer');
 

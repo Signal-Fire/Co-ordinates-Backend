@@ -1,6 +1,6 @@
 // load up the user model
 var User = require('../models/user');
-var config = require('../config/configuration'); // get db config file
+var config = require('../Config'); // get db config file
 
 var JwtStrategy = new(require('passport-jwt').Strategy)({
     secretOrKey: config.passport_secret

@@ -1,8 +1,7 @@
-/*jshint esversion: 6*/
 var moment = require('moment');
 var jwt = require('jwt-simple');
 
-var config = require('../config/configuration');
+var config = require('../Config');
 var Device = require('../models/device');
 var Log = require('../models/logger');
 var User = require('../models/user');

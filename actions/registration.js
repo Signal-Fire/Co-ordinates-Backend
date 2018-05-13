@@ -1,5 +1,4 @@
-/*jshint esversion: 6*/
-var config = require('../config/configuration');
+var config = require('../Config');
 var moment = require('moment');
 
 var User = require('../models/user');

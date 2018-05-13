@@ -1,39 +1,40 @@
-var app = require('express').Router();
+var route = require('express').Router(),
+    Find = require('../../actions/Find');
 
-var queries = require('../actions/queries');
-var status = require('../actions/status');
+var queries = require('../../actions/queries');
 
-app.get('/all', function (req, res) {
-    queries.DisplayAll().then(function (result) {
-        status.Accepted(res, result);
-    }).catch(function(err) {
-        status.Unauthorized(res);
-    });
-});
-
-app.get('/position/:id', function(req, res) {
+route.get('/position/:id', function(req, res) {
     queries.FindPositionByDeviceId(req.params.id)
         .then(function(result) {
-            status.Accepted(res, result);
+            return res.status(200).send(result);
         }).catch(function(err) {
-            status.BadRequest(res);
+            return res.status(400).send({ error : err });
         });
 });
 
-app.get('/device/all', function(req, res) {
+route.get('/positions/count/:id', function(req, res) {
+    queries.FindCountByDeviceId(req.params.id)
+        .then(result => {
+            return res.status(200).send({ count : result });
+        }).catch(error => {
+            return res.status(400).send({ error: error });
+        })
+});
+
+route.get('/device/all', function(req, res) {
     queries.DisplayDevices().then(function(result) {
-        status.Accepted(res, result);
+        return res.status(200).send(result);
     }).catch(function(err) {
-        status.Unauthorized(res);
+        return res.status(400).send({ error : err });
     });
 });
 
-app.get('/device/:id', function (req, res) {
+route.get('/device/:id', function (req, res) {
     queries.FindByDeviceId(req.params.id).then(function (result) {
-        status.Accepted(res, result);
+        return res.status(200).send(result);
     }).catch(function(err) {
-        status.Unauthorized(res);
+        return res.status(400).send({ error : err });
     });
 });
 
-module.exports = app;
+module.exports = route;

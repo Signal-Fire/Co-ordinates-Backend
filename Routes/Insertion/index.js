@@ -1,21 +1,20 @@
 var app = require('express').Router();
 
-var queries = require('../actions/queries');
-var status = require('../actions/status');
+var queries = require('../../actions/queries');
 
 app.post('/device', function(req, res) {
     queries.InsertDevice(req.body).then(function(result) {
-        status.Accepted(res, result);
+        return res.status(200).send(result);
     }).catch(function(err) {        
-        status.BadRequest(res);
+        return res.status(400).send({ error : err });
     });
 });
 
 app.post('/position', function (req, res) {    
     queries.InsertPosition(req.body).then(function (result) {
-        status.Accepted(res, result);
+        return res.status(200).send(result);
     }).catch(function(err) {
-        status.Unauthorized(res);
+        return res.status(400).send({ error : err });
     });
 });
 

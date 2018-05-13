@@ -1,9 +1,8 @@
-/*jshint esversion: 6*/
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 var crypto = require('crypto');
 
-var config = require('../config/configuration');
+var config = require('../Config');
 var Schema = mongoose.Schema;
 
 var conn = mongoose.createConnection(config.db_url);

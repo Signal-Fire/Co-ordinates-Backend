@@ -7,10 +7,11 @@ var express = require('express'),
 
 var app = express();
 
-	var AuthRoute = require('./Routes/Authentication'),
-		InsertRoute = require('./Routes/Insertion'),
-		FindRoute = require('./Routes/Find'),
-		DeleteRoute = require('./Routes/Delete');
+var AuthRoute = require('./Routes/Authentication'),
+	InsertRoute = require('./Routes/Insertion'),
+	FindRoute = require('./Routes/Find'),
+	FindPositionsRoute = require('./Routes/Find/Positions'),
+	DeleteRoute = require('./Routes/Delete');
 
 app.use(cors());
 app.use(compression());
@@ -21,12 +22,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use('/api/find', FindRoute);
+app.use('/api/find/positions', FindPositionsRoute);
 app.use('/api/insert', InsertRoute);
 app.use('/api/delete', DeleteRoute);
 app.use('/api/auth', AuthRoute);
 
 var cron = new checkLastLogCron();
 
-app.listen(port);
+app.listen(config.port);
 
-console.log('Run Forrest Run! ' + port + ' miles!');
+console.log('Run Forrest Run! ' + config.port + ' miles!');

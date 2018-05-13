@@ -1,6 +1,5 @@
 var config = require('../../../Config'),
-    Position = require('../../../models/position'),
-    Device = require('../../../models/device');
+    Position = require('../../../models/position');
 
 module.exports = new class PositionFinder {
     constructor() {

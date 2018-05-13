@@ -8,6 +8,8 @@ var express = require('express'),
 var app = express();
 
 var AuthRoute = require('./Routes/Authentication'),
+	LoginRoute = require('./Routes/Login'),
+	CreationRoute = require('./Routes/Create'),
 	InsertRoute = require('./Routes/Insertion'),
 	FindDeviceRoute = require('./Routes/Find/Devices'),
 	FindPositionsRoute = require('./Routes/Find/Positions'),
@@ -22,8 +24,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+app.use('/api/create/', CreationRoute);
 app.use('/api/find/devices', FindDeviceRoute);
 app.use('/api/find/positions', FindPositionsRoute);
+app.use('/api/login', LoginRoute);
 app.use('/api/insert', InsertRoute);
 app.use('/api/delete', DeleteRoute);
 app.use('/api/auth', AuthRoute);

@@ -1,20 +1,19 @@
-var app = require('express').Router();
+var app = require('express').Router(),
+    Delete = require('../../actions/Delete');
 
-var queries = require('../../actions/queries');
-    
 app.post('/all', function (req, res) {
-    queries.DropAll().then(function (result) {
-        return res.status(200).send(result);
-    }).catch(function(err) {
-        return res.status(400).send({ error : err });
-    });
+    Delete.All().then(result => {
+        return res.status(200).send({ deleted : result });
+    }).catch(error => {
+        return res.status(400).send({ error : error });
+    })
 });
 
 app.post('/:id', function (req, res) {
-    queries.DropByDeviceId(req.params.id).then(function (result) {
-        return res.status(200).send(result);
-    }).catch(function(err) {
-        return res.status(400).send({ error : err });
+    Delete.Device(req.params.id).then(result => {
+        return res.status(200).send({ deleted : result });
+    }).catch(error => {
+        return res.status(400).send({ error : error });
     });
 });
 

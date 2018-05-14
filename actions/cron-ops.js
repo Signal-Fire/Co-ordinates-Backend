@@ -25,7 +25,6 @@ class CronOps {
           };
 
         var task = cron.schedule('*/60 * * * *', function() {
-            
             queries.DisplayDevices()
             .then(function(result) {
                 for (var i = 0; i < result.length; i++) {
@@ -56,7 +55,7 @@ class CronOps {
                                 }).catch(function(err) {
                                     console.log(err);
                                 });
-                            }                         
+                            }                      
                         }
                     }).catch(function(err) {
                         console.log(err);

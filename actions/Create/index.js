@@ -1,4 +1,5 @@
 var Device = require('../../models/device'),
+    User = require('../../models/user'),
     Position = require('../../models/position'),
     Log = require('../../models/logger');
 
@@ -52,4 +53,21 @@ module.exports = new class Create {
         });
     }
 
+    User(user) {
+        return new Promise(function(resolve, reject) {
+            var newUser = new User({
+                email: user.email,
+                password: user.password
+            });
+
+            newUser.save(newUser, function(err, result) {
+                if (err) {
+                    reject(err);
+                    return err;
+                }
+                
+                resolve(result);
+            });
+        });
+    }
 }

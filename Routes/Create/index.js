@@ -17,4 +17,12 @@ route.post('/position', function(req, res) {
     })
 })
 
+route.post('/user', function(req, res) {
+    Creator.User(req.body).then(result => {
+        return res.status(201).send(result);
+    }).catch(error => {
+        return res.status(400).send({ error : error });
+    })
+})
+
 module.exports = route;

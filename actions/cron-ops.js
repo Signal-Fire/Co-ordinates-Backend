@@ -25,7 +25,6 @@ class CronOps {
           };
 
         var task = cron.schedule('*/60 * * * *', function() {
-            
             queries.DisplayDevices()
             .then(function(result) {
                 for (var i = 0; i < result.length; i++) {
@@ -36,7 +35,7 @@ class CronOps {
 
                             var tooLate = moment().add(-24, 'hours');
 
-                            var lastLog = moment(result[result.length - 2].time);
+                            var lastLog = moment(result[result.length - 2].time, 'DD-MM-YYYY hh:mm:ss').format();
 
                             if (!lastLog.isValid()) {
                                 lastLog = moment(result[result.length - 2].time, 'DD-MM-YYYY hh:mm:ss').format();    

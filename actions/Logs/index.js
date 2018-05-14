@@ -6,7 +6,9 @@ module.exports = new class Logger {
     }
 
     Create(message) {
-        var log = new Log(message);
+        var log = new Log({
+            message : message
+        });
 
         log.save(function(err, result) {
             if (err)

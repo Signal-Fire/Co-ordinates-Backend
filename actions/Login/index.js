@@ -1,6 +1,8 @@
 var Logger = require('../Logs'),
     jwt = require('jwt-simple'),
-    User = require('../../models/user');
+    config = require('../../Config'),
+    User = require('../../models/user'),
+    Device = require('../../models/device');
 
 module.exports = new class Login {
     constructor() {
@@ -22,7 +24,20 @@ module.exports = new class Login {
                     var token = jwt.encode(user.email, config.passport_secret);
 
                     return resolve(token);
-                });
+                })
+            })
+        })
+    }
+
+    LoginDevice(user) {
+        return new Promise(function(resolve, reject) {
+            Device.findOne({ email : user.email }, function(err, result) {
+                if (err || result === null)
+                    return reject("Unable to authenticate");
+
+                Logger.Create("User: " + user.email + " logged in!");
+
+                return resolve(result);
             })
         })
     }

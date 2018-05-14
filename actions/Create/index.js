@@ -1,4 +1,5 @@
 var Device = require('../../models/device'),
+    Position = require('../../models/position'),
     Log = require('../../models/logger');
 
 module.exports = new class Create {

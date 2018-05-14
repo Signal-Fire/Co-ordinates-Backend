@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 var crypto = require('crypto');
 
-var config = require('../Config');
+var config = require('../config');
 var Schema = mongoose.Schema;
 
 var conn = mongoose.createConnection(config.db_url);

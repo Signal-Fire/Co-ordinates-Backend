@@ -1,6 +1,6 @@
 var Logger = require('../Logs'),
     jwt = require('jwt-simple'),
-    config = require('../../Config'),
+    config = require('../../config'),
     User = require('../../models/user'),
     Device = require('../../models/device');
 

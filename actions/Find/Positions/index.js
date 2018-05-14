@@ -1,4 +1,4 @@
-var config = require('../../../Config'),
+var config = require('../../../config'),
     Position = require('../../../models/position');
 
 module.exports = new class PositionFinder {

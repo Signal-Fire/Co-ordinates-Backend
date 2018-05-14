@@ -1,4 +1,4 @@
-var config = require('../Config');
+var config = require('../config');
 var moment = require('moment');
 
 var User = require('../models/user');

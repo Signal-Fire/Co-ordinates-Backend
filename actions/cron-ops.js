@@ -1,8 +1,9 @@
-var cron = require('node-cron');
-var queries = require('./queries');
-var config = require('../Config');
-var moment = require('moment');
-var nodemailer = require('nodemailer');
+var cron = require('node-cron'),
+    moment = require('moment'),
+    nodemailer = require('nodemailer'),
+    DeviceFinder = require('./Find/Devices'),
+    PositionFinder = require('./Find/Positions'),
+    config = require('../config');
 
 //My horrendous CronOps class..
 
@@ -25,10 +26,10 @@ class CronOps {
           };
 
         var task = cron.schedule('*/60 * * * *', function() {
-            queries.DisplayDevices()
+            DeviceFinder.All()
             .then(function(result) {
                 for (var i = 0; i < result.length; i++) {
-                    queries.FindPositionByDeviceId(result[i]._id)
+                    PositionFinder.PositionsByDeviceId(result[i]._id)
                     .then(function(result) {
                         if (result.length > 0) {   
                             var timeToNotify = moment().add(-60, 'minutes');
@@ -43,7 +44,7 @@ class CronOps {
                             }
 
                             if ((timeToNotify > lastLog) && (lastLog > tooLate)) {
-                                queries.FindByDeviceId(result[i].device).then(function(result) {
+                                DeviceFinder.ById(result[i].device).then(function(result) {
                                     mailOptions.to = result.email;
                                     transporter.sendMail(mailOptions, function(error, info){
                                         if (error) {

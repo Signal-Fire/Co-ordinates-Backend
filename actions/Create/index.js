@@ -26,4 +26,29 @@ module.exports = new class Create {
             })
         })
     }
+
+    Position(position) {
+        return new Promise(function (resolve, reject) {
+            if (position.length === undefined) {
+                var newPos = new Position(position);
+                newPos.save(function(err, result) {
+                    if (err)
+                        reject(err);
+
+                    resolve(result);
+                });
+            }
+
+            for (var i = 0; i < position.length; i++) {
+                var newPos = new Position(position[i]);            
+                newPos.save(function(err, result) {                
+                    if (err)
+                        reject(err);
+                    
+                    resolve(result);
+                });
+            }                   
+        });
+    }
+
 }

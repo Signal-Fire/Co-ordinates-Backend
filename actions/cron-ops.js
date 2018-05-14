@@ -35,7 +35,7 @@ class CronOps {
 
                             var tooLate = moment().add(-24, 'hours');
 
-                            var lastLog = moment(result[result.length - 2].time, 'DD-MM-YYYY hh:mm:ss').format();
+                            var lastLog = moment(result[result.length - 2].time);
 
                             if (!lastLog.isValid()) {
                                 lastLog = moment(result[result.length - 2].time, 'DD-MM-YYYY hh:mm:ss').format();    
@@ -55,7 +55,7 @@ class CronOps {
                                 }).catch(function(err) {
                                     console.log(err);
                                 });
-                            }                         
+                            }                      
                         }
                     }).catch(function(err) {
                         console.log(err);

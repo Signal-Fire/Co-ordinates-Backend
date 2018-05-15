@@ -36,17 +36,15 @@ module.exports = new class CronOps {
                         var earliestToNotify = moment().add(-60, 'minutes').format(timeFormat);
                         var latestToNotify = moment().add(-24, 'hours').format(timeFormat);
                         var lastUserLog = moment(position.time, timeFormat).format();
-
+                        
                         if ((lastUserLog < latestToNotify) && (lastUserLog > earliestToNotify)) {
                             mailOptions.to = position.email;
 
                             transporter.sendMail(mailOptions, function(error, info) {
                                 if (error)
-                                    return reject("Issue sending mail");
+                                    console.log(error);
 
                                 Logger.Create("Sent an email to remind " + position.email + " to use the app");
-
-                                return resolve("Sending email success!");
                             })
                         }
                     }).catch(error => {

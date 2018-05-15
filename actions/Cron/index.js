@@ -1,6 +1,7 @@
 var cron = require('node-cron'),
     moment = require('moment'),
     nodemailer = require('nodemailer'),
+    Logger = require('../Logs'),
     DeviceFinder = require('../Find/Devices'),
     PositionFinder = require('../Find/Positions'),
     config = require('../../config');
@@ -42,6 +43,8 @@ module.exports = new class CronOps {
                             transporter.sendMail(mailOptions, function(error, info) {
                                 if (error)
                                     return reject("Issue sending mail");
+
+                                Logger.Create("Sent an email to remind " + position.email + " to use the app");
 
                                 return resolve("Sending email success!");
                             })

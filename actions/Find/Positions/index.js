@@ -21,6 +21,27 @@ module.exports = new class PositionFinder {
         })
     }
 
+    OnePositionByDeviceId(email, deviceId) {
+        return new Promise(function(resolve, reject) {
+            let query = {
+                "device" : deviceId
+            }
+
+            Position.findOne(query, function(err, position) {
+                if (err || position === null)
+                    return reject("No position")
+                
+                var returnObject = {
+                    email : email,
+                    time : position.time,
+                    id : position._id
+                }
+
+                return resolve(returnObject)
+            });
+        })
+    }
+
     ById(positionId) {
         return new Promise(function(resolve, reject) {
             Position.findById(positionId, function(err, result) {

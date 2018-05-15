@@ -3,7 +3,7 @@ var express = require('express'),
 	compression = require('compression'),
 	bodyParser = require('body-parser'),
 	config = require('./config'),
-	checkLastLogCron = require('./actions/cron-ops');
+	checkLastLogCron = require('./actions/Cron');
 
 var app = express();
 
@@ -27,8 +27,6 @@ app.use('/api/find/devices', FindDeviceRoute);
 app.use('/api/find/positions', FindPositionsRoute);
 app.use('/api/login', LoginRoute);
 app.use('/api/delete', DeleteRoute);
-
-var cron = new checkLastLogCron();
 
 app.listen(config.port);
 
